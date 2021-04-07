@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { admainRoute } from './routes';
 import {Route,Redirect,Switch} from 'react-router-dom';
+import './App.css';
 
 export default class App extends Component {
   render() {
