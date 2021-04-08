@@ -7,12 +7,6 @@ const Home = Loadable({
     loading: Loading,
 });
 
-const Admin = Loadable({
-    loader: () => import('./admin'),
-    loading: Loading,
-});
-
 export {
-    Home,
-    Admin
+    Home
 }

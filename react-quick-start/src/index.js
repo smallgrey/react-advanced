@@ -3,19 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import { mainRoute } from './routes';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route path="/admin" component={App}/>
-      {
-        mainRoute.map( (route, key)=>{
-          return <Route path={route.pathname} component={route.component} key={key}/>
-        })
-      }
-      <Redirect to='/home' from='/' exact/>
+      <Route path="/" component={App}/>
     </Switch>
   </Router>,
   document.getElementById('root')
