@@ -7,6 +7,24 @@ const Home = Loadable({
     loading: Loading,
 });
 
+const Other = Loadable({
+    loader: () => import('./other'),
+    loading: Loading,
+});
+
+const Second = Loadable({
+    loader: () => import('./other/second'),
+    loading: Loading,
+});
+
+const Third = Loadable({
+    loader: () => import('./other/third'),
+    loading: Loading,
+});
+
 export {
-    Home
+    Home,
+    Other,
+    Second,
+    Third
 }
