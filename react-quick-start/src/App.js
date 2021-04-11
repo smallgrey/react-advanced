@@ -6,8 +6,8 @@ import './App.css';
 
 // locale data
 const locales = {
-  "en-US": require('./locales/en-US.json'),
-  "zh-CN": require('./locales/zh-CN.json'),
+  'en-US': require('./locales/en-US.json'),
+  'zh-CN': require('./locales/zh-CN.json'),
 };
 
 export default class App extends Component {
@@ -21,8 +21,8 @@ export default class App extends Component {
   loadLocales() {
 
     let currentLocale = intl.determineLocale({
-      urlLocaleKey: "lang",
-      cookieLocaleKey: "lang"
+      urlLocaleKey: 'lang',
+      cookieLocaleKey: 'lang'
     });
 
     intl.init({ // react-intl-universal 是单例模式, 只应该实例化一次

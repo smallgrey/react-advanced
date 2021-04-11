@@ -1,61 +1,40 @@
-import { Switch, Button } from 'antd';
 import { Component } from 'react';
-import { Link }from 'react-router-dom';
-import intl from 'react-intl-universal';
-import Cookies from 'js-cookie';
+import ChildOne from '../../components/child/T1';
+import ChildTwo from '../../components/child/T2'
 
-let isChecked = Cookies.get('lang') === "zh-CN" ? true : false;
+
+const parentWrapper = {
+  padding: '10px',
+  border: '1px solid red',
+  boxSizing: 'border-box'
+}
 
 class Home extends Component {
-
+    constructor(){
+      super()
+      this.state={
+          msg:'这是父组件的私有数据',
+          childVal: ''
+      }
+    }
+    
     render() {
       return (
-        <div>
-            {intl.get('INPUT_MOBILE')}
-            <Switch checkedChildren="中文" unCheckedChildren="英文" defaultChecked={isChecked} onClick = {(isChecked) => {
-                this.handleClick(isChecked)
-              }}/>
-            <div>
-              方式一：通过params<br/>  
-              <Link to={'/other/2'}>params-HTML方式跳转页面</Link>
-              <Button onClick={() => {
-                this.paramJS()
-              }}>params-JS方式跳转页面</Button>
-            </div>
-            <div>
-              方式二：通过query<br/>  
-              <Link to={{ pathname : '/second' , query : { name : 'small' }}}>query-HTML方式跳转页面</Link>
-              <Button onClick={() => {
-                this.queryJS()
-              }}>query-JS方式跳转页面</Button>
-            </div>
-            <div>
-              方式三：通过state<br/>  
-              <Link to={{ pathname : '/third' , state : { name : 'small2' }}}>state-HTML方式跳转页面</Link>
-              <Button onClick={() => {
-                this.stateJS()
-              }}>state-JS方式跳转页面</Button>
-            </div>
+        <div style={parentWrapper}>
+            <div>子组件传来的数据: { this.state.childVal } </div>
+            <ChildOne msg={this.state.msg} setMsg={(data) => {
+              this.setMsg(data)
+            }}></ChildOne>
+            <ChildTwo></ChildTwo>
         </div>
       );
     }
-    handleClick = (isChecked) => { // 国际化的点击事件
-      let lang = "en-US";
-      if(isChecked) {
-        lang = "zh-CN";
-      }
-    	Cookies.set('lang', lang, { expires: 7 });
-      window.location.reload(true);
-  	}
-    paramJS = () => {
-      this.props.history.push('/other/2')
-    }
-    queryJS = () => {
-      this.props.history.push({ pathname: '/second' ,query: { name: ' small'} })
-    }
-    stateJS = () => {
-      this.props.history.push({ pathname: '/third',state: {name : 'small2' } })
-    }
+
+    //这里必须使用箭头函数
+    setMsg = (childMsg) => {
+      console.log(childMsg)
+      this.setState({ childVal: childMsg })
+  }
 }
 
 export default Home;
